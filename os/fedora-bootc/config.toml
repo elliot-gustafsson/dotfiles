@@ -1,0 +1,5 @@
+[customizations]
+hostname = "elliot"
+
+[customizations.kernel]
+append = "quiet splash"

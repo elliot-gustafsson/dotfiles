@@ -1,0 +1,31 @@
+[org/gnome/shell]
+enabled-extensions=['dash-to-dock@micxgx.gmail.com', 'hidetopbar@mathieu.bidon.ca', 'tiling-assistant@leleat-on-github']
+favorite-apps=['com.mitchellh.ghostty.desktop', 'org.mozilla.firefox.desktop', 'codium.desktop']
+
+[org/gnome/shell/extensions/dash-to-dock]
+dock-fixed=false
+dash-max-icon-size=32
+multi-monitor=true
+show-favorites=true
+show-running=true
+show-windows-preview=true
+show-mounts=false
+show-trash=false
+show-show-apps-button=false
+show-mounts-only-mounted=false
+show-icons-emblems=false
+dance-urgent-applications=false
+custom-theme-shrink=true
+disable-overview-on-startup=true
+apply-custom-theme=true
+click-action='focus-or-appspread'
+hot-keys=true
+intellihide-mode='ALL_WINDOWS'
+autohide-in-fullscreen=true
+show-dock-urgent-notify=false
+
+[org/gnome/shell/extensions/hidetopbar]
+mouse-sensitive-fullscreen-window=false
+enable-active-window=false
+enable-intellihide=false
+mouse-sensitive=false

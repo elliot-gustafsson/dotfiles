@@ -1,0 +1,19 @@
+TAB:complete
+set completion-ignore-case on
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\eOA": history-search-backward
+"\eOB": history-search-forward
+
+# Map Shift+Left to move back one character (same as Left)
+"\e[1;2D": backward-char
+
+# Map Shift+Right to move forward one character (same as Right)
+"\e[1;2C": forward-char
+
+# Map Ctrl + Right Arrow
+"\e[1;5C": forward-word
+
+# Map Ctrl + Left Arrow
+"\e[1;5D": backward-word

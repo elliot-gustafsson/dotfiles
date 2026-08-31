@@ -1,0 +1,5 @@
+**/build-output
+**/.osbuild-store
+**/*.qcow2
+**/*.iso
+**/*.key

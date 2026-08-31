@@ -1,0 +1,160 @@
+FROM quay.io/fedora/fedora-bootc:44 AS base
+
+FROM base AS ghostty-builder
+
+ARG ZIG_VERSION=0.15.2
+ARG GHOSTTY_VERSION=1.3.1
+
+RUN dnf install -y \
+    gtk4-devel \
+    gtk4-layer-shell-devel \
+    libadwaita-devel \
+    gettext \
+    tar \
+    xz \
+    && dnf clean all
+
+RUN curl -sSL https://ziglang.org/download/${ZIG_VERSION}/zig-x86_64-linux-${ZIG_VERSION}.tar.xz | tar -xJ -C /tmp && \
+    mv /tmp/zig-x86_64-linux-${ZIG_VERSION} /opt/zig
+
+RUN mkdir -p /tmp/ghostty /tmp/zig-cache /tmp/zig-global-cache && \
+    curl -sSL https://release.files.ghostty.org/${GHOSTTY_VERSION}/ghostty-${GHOSTTY_VERSION}.tar.gz | tar -xz -C /tmp/ghostty --strip-components=1 && \
+    cd /tmp/ghostty && \
+    /opt/zig/zig build \
+    --cache-dir /tmp/zig-cache \
+    --global-cache-dir /tmp/zig-global-cache \
+    -Doptimize=ReleaseFast \
+    -Dcpu=x86_64_v3 \
+    -p /usr
+
+
+FROM base AS init
+
+ADD resources /resources
+COPY --from=home . /skel/
+COPY --from=repo . /skel/.dotfiles/
+
+RUN find /resources -type d -exec chmod 755 {} + && \
+    find /resources -type f -exec chmod 644 {} + && \
+    find /skel -type d -exec chmod 755 {} + && \
+    find /skel -type f -exec chmod 644 {} +
+
+RUN mkdir -p /extra-fonts && \
+    curl -sSL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.tar.xz | tar -xJ -C /extra-fonts
+
+
+FROM base
+
+RUN echo "countme=0" >> /etc/dnf/dnf.conf && \
+    echo "install_weak_deps=False" >> /etc/dnf/dnf.conf && \
+    echo "KEYMAP=se" > /etc/vconsole.conf && \
+    echo 'XKBLAYOUT="se"' >> /etc/vconsole.conf
+
+RUN dnf install -y \
+    --disablerepo="fedora-cisco-openh264*" \
+    gnome-shell \
+    mutter \
+    gdm \
+    gnome-control-center \
+    gnome-keyring \
+    gvfs \
+    && dnf clean all
+
+RUN dnf install -y \
+    nautilus \
+    gnome-calculator \
+    gnome-calendar \
+    loupe \
+    gnome-disk-utility \
+    baobab \
+    gnome-system-monitor \
+    gnome-shell-extension-dash-to-dock \
+    gnome-extensions-app \
+    firefox \
+    ffmpeg-free \
+    gtk4-layer-shell \
+    virt-viewer \
+    desktop-file-utils \
+    && dnf clean all
+
+RUN dnf install -y \
+    gcc \
+    clang \
+    lld \
+    llvm \
+    clang-tools-extra \
+    vim-enhanced \
+    git \
+    ripgrep \
+    fzf \
+    jq \
+    make \
+    wget \
+    nmap \
+    htop \
+    ncdu \
+    bind-utils \
+    whois \
+    nvtop \
+    less \
+    man-db \
+    man-pages \
+    bash-completion \
+    podman \
+    podman-docker \
+    unzip \
+    flatpak \
+    wl-clipboard \
+    xclip \
+    pciutils \
+    usbutils \
+    lsof \
+    rsync \
+    fastfetch \
+    fd-find \
+    p7zip \
+    p7zip-plugins \
+    zstd \
+    && dnf clean all
+
+RUN flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && \
+    flatpak install -y --system flathub com.valvesoftware.Steam
+
+# Install gnome extensions
+RUN GNOME_VER=$(gnome-shell --version | awk '{print $3}' | cut -d. -f1) && \
+    UUID_HTB="hidetopbar@mathieu.bidon.ca" && \
+    PK_HTB=$(curl -s "https://extensions.gnome.org/extension-info/?uuid=${UUID_HTB}" | jq -r ".shell_version_map[\"${GNOME_VER}\"].pk") && \
+    curl -sL "https://extensions.gnome.org/download-extension/${UUID_HTB}.shell-extension.zip?version_tag=${PK_HTB}" -o /tmp/htb.zip && \
+    mkdir -p /usr/share/gnome-shell/extensions/${UUID_HTB} && \
+    unzip -q /tmp/htb.zip -d /usr/share/gnome-shell/extensions/${UUID_HTB}/ && \
+    cp /usr/share/gnome-shell/extensions/${UUID_HTB}/schemas/*.gschema.xml /usr/share/glib-2.0/schemas/ 2>/dev/null || true && \
+    UUID_TA="tiling-assistant@leleat-on-github" && \
+    PK_TA=$(curl -s "https://extensions.gnome.org/extension-info/?uuid=${UUID_TA}" | jq -r ".shell_version_map[\"${GNOME_VER}\"].pk") && \
+    curl -sL "https://extensions.gnome.org/download-extension/${UUID_TA}.shell-extension.zip?version_tag=${PK_TA}" -o /tmp/ta.zip && \
+    mkdir -p /usr/share/gnome-shell/extensions/${UUID_TA} && \
+    unzip -q /tmp/ta.zip -d /usr/share/gnome-shell/extensions/${UUID_TA}/ && \
+    cp /usr/share/gnome-shell/extensions/${UUID_TA}/schemas/*.gschema.xml /usr/share/glib-2.0/schemas/ 2>/dev/null || true && \
+    chmod -R 755 /usr/share/gnome-shell/extensions/ && \
+    rm -f /tmp/htb.zip /tmp/ta.zip
+
+COPY --from=ghostty-builder /usr/bin/ghostty /usr/bin/ghostty
+COPY --from=ghostty-builder /usr/share/ /usr/share/
+
+COPY --from=init /resources/ /
+COPY --from=init /extra-fonts/ /usr/share/fonts/hack-nerd-font/
+COPY --from=init /skel/ /etc/skel/
+
+RUN update-desktop-database /usr/share/applications && \
+    gtk4-update-icon-cache -q -t -f /usr/share/icons/hicolor && \
+    fc-cache -f /usr/share/fonts && \
+    glib-compile-schemas /usr/share/glib-2.0/schemas/ && \
+    dconf update && \
+    systemctl enable gdm.service && \
+    systemctl set-default graphical.target
+
+RUN echo "export EDITOR=vim" > /etc/profile.d/editor.sh && \
+    echo "export VISUAL=vim" >> /etc/profile.d/editor.sh
+
+RUN useradd -m -G wheel -s /bin/bash elliot && \
+    echo "elliot:password" | chpasswd && \
+    chage -d 0 elliot

@@ -1,0 +1,12 @@
+FROM docker.io/almalinux:10
+
+RUN dnf install -y \
+    qemu-kvm \
+    xorriso \
+    procps-ng \
+    telnet \
+    nmap-ncat \
+    openssh-clients \
+    && dnf clean all
+
+WORKDIR /data

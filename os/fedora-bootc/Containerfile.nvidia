@@ -1,0 +1,34 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+
+RUN dnf config-manager addrepo \
+    --from-repofile=https://developer.download.nvidia.com/compute/cuda/repos/fedora44/x86_64/cuda-fedora.repo
+
+RUN KERNEL_VERSION=$(rpm -q kernel --qf "%{VERSION}-%{RELEASE}.%{ARCH}") && \
+    dnf install -y \
+    kernel-devel-${KERNEL_VERSION} \
+    kernel-headers-${KERNEL_VERSION} \
+    dkms \
+    gcc \
+    make \
+    kmod-nvidia-open-dkms \
+    nvidia-driver \
+    nvidia-driver-cuda \
+    nvidia-driver-NvFBCOpenGL \
+    nvidia-settings \
+    mangohud \
+    gamemode \
+    && \
+    dkms autoinstall -k "${KERNEL_VERSION}" && \
+    depmod -a "${KERNEL_VERSION}" && \
+    dnf remove -y kernel-devel gcc make && \
+    dnf clean all
+
+# Wayland Modesetting & Framebuffer Direct Rendering
+# modeset=1 + fbdev=1 enables smooth Wayland rendering, VRR/G-Sync, and prevents stutter
+RUN echo "options nvidia-drm modeset=1 fbdev=1" > /etc/modprobe.d/nvidia.conf
+
+# Enable Power Management
+RUN systemctl enable nvidia-suspend.service \
+    nvidia-resume.service \
+    nvidia-hibernate.service

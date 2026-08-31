@@ -1,0 +1,48 @@
+[user]
+    name = Elliot Gustafsson
+    email = elliot643@hotmail.com
+
+[alias]
+    # shortcuts
+    p = pull
+    l = log
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+
+    # aliases
+    s = status -sb
+    pushup = "push --set-upstream origin HEAD"
+    undo = reset --soft HEAD~1
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit --date=format-local:'%Y-%m-%d %H:%M:%S'
+    lg-rel = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
+[core]
+    editor = vim
+    excludesFile = ~/.gitignore
+    autocrlf = input
+
+[pull]
+    rebase = true
+
+[rebase]
+    autoStash = true
+
+[fetch]
+    prune = true
+
+[push]
+    autoSetupRemote = true
+
+[rerere]
+    # "Reuse Recorded Resolution"
+    # If you resolve a conflict once, Git remembers it.
+    # If you rebase and hit the same conflict again, Git auto-solves it.
+    enabled = true
+
+[credentials]
+    helper = store
+
+[safe]
+    directory = .

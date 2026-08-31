@@ -1,0 +1,5 @@
+FROM scratch
+
+ARG FILE_PATH
+
+ADD --chmod=644 ${FILE_PATH} /disk/disk.img
