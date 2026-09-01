@@ -117,8 +117,9 @@ RUN dnf install -y \
     zstd \
     && dnf clean all
 
-RUN flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && \
-    flatpak install -y --system flathub com.valvesoftware.Steam
+RUN flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+# flatpak install -y --system flathub com.valvesoftware.Steam
 
 # Install gnome extensions
 RUN GNOME_VER=$(gnome-shell --version | awk '{print $3}' | cut -d. -f1) && \

@@ -6,6 +6,7 @@ OS_STRING=$(shell sed -n 's/^FROM .*\/\([^@ ]*\).*/\1/p' Containerfile | tail -1
 CONTAINER_TAG=quay.io/elliot_gustafsson/$(OS_STRING)-$(BUILD_TIMESTAMP)
 CONTAINER_TAG_NVIDIA=quay.io/elliot_gustafsson/$(OS_STRING)-nvidia-$(BUILD_TIMESTAMP)
 ISO_TAG=quay.io/elliot_gustafsson/$(OS_STRING)-iso
+ISO_TAG_NVIDIA=quay.io/elliot_gustafsson/$(OS_STRING)-iso-nvidia
 
 AUTH_FILE := $(shell \
 	if [ -f "$(HOME)/.docker/config.json" ]; then echo "$(HOME)/.docker/config.json"; \
@@ -85,7 +86,7 @@ unlock-mok:
 	@echo "MOK key decrypted to mok/MOK.key"
 
 build-nvidia: build-image-nvidia build-disk-file-nvidia
-build-iso-nvidia: build-image-nvidia build-iso-file-nvidia build-iso-image-nvidia
+build-iso-nvidia: build-image-nvidia build-iso-file-nvidia
 
 build-image-nvidia: build-image
 	@if [ ! -f "mok/MOK.key" ]; then \
@@ -215,4 +216,16 @@ make-boot-media: ./build-output/bootiso/install.iso
 	@echo "WARNING: All data on $(USB) will be permanently destroyed!"
 	@read -p "Are you sure you want to write to $(USB)? (y/N): " confirm && [ "$$confirm" = "y" ] || [ "$$confirm" = "Y" ]
 	sudo dd if=build-output/bootiso/install.iso of=$(USB) bs=4M status=progress oflag=sync
+	@echo "Boot media created successfully on $(USB)."
+
+make-boot-media-nvidia: ./build-output/nvidia/bootiso/install.iso
+	@if [ -z "$(USB)" ] || [ ! -b "$(USB)" ]; then \
+		echo "Error: Please specify a valid block device (e.g. make make-boot-media-nvidia USB=/dev/sda)"; \
+		echo "\nAvailable block devices:"; \
+		lsblk -d -o NAME,SIZE,TYPE,MODEL,TRAN; \
+		exit 1; \
+	fi
+	@echo "WARNING: All data on $(USB) will be permanently destroyed!"
+	@read -p "Are you sure you want to write to $(USB)? (y/N): " confirm && [ "$$confirm" = "y" ] || [ "$$confirm" = "Y" ]
+	sudo dd if=build-output/nvidia/bootiso/install.iso of=$(USB) bs=4M status=progress oflag=sync
 	@echo "Boot media created successfully on $(USB)."
