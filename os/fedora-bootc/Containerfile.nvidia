@@ -1,27 +1,26 @@
 ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 
-RUN dnf config-manager addrepo \
-    --from-repofile=https://developer.download.nvidia.com/compute/cuda/repos/fedora44/x86_64/cuda-fedora.repo
+ARG NVIDIA_DRIVER_VERSION="610.57.04"
 
-RUN KERNEL_VERSION=$(rpm -q kernel --qf "%{VERSION}-%{RELEASE}.%{ARCH}") && \
+RUN curl -sSL https://developer.download.nvidia.com/compute/cuda/repos/fedora44/x86_64/cuda-fedora44.repo \
+    -o /etc/yum.repos.d/cuda-fedora44.repo
+
+COPY mok/MOK.der /var/lib/dkms/mok.pub
+
+RUN --mount=type=secret,id=mok_key,target=/var/lib/dkms/mok.key \
+    KERNEL_VERSION=$(rpm -q kernel --qf "%{VERSION}-%{RELEASE}.%{ARCH}") && \
     dnf install -y \
     kernel-devel-${KERNEL_VERSION} \
-    kernel-headers-${KERNEL_VERSION} \
+    kernel-headers \
     dkms \
-    gcc \
-    make \
-    kmod-nvidia-open-dkms \
-    nvidia-driver \
-    nvidia-driver-cuda \
-    nvidia-driver-NvFBCOpenGL \
-    nvidia-settings \
-    mangohud \
-    gamemode \
+    kmod-nvidia-open-dkms-${NVIDIA_DRIVER_VERSION}* \
+    nvidia-driver-${NVIDIA_DRIVER_VERSION}* \
+    nvidia-driver-cuda-${NVIDIA_DRIVER_VERSION}* \
+    nvidia-settings-${NVIDIA_DRIVER_VERSION}* \
     && \
     dkms autoinstall -k "${KERNEL_VERSION}" && \
-    depmod -a "${KERNEL_VERSION}" && \
-    dnf remove -y kernel-devel gcc make && \
+    rpm -e --nodeps dkms && \
     dnf clean all
 
 # Wayland Modesetting & Framebuffer Direct Rendering
