@@ -40,8 +40,7 @@ RUN find /resources -type d -exec chmod 755 {} + && \
     find /skel -type f -exec chmod 644 {} +
 
 RUN mkdir -p /extra-fonts && \
-    curl -sSL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.tar.xz | tar -xJ -C /extra-fonts
-
+    curl -sSL https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/Hack.tar.xz | tar -xJ -C /extra-fonts
 
 FROM base
 

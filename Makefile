@@ -1,6 +1,6 @@
-set-settings: set-bashrc set-inputrc set-ghostty-settings set-codium-settings
+set-settings: set-bashrc set-inputrc set-git-config set-ghostty-settings set-codium-settings
 
-sync-settings: sync-bashrc sync-inputrc sync-ghostty-settings sync-codium-settings
+sync-settings: sync-bashrc sync-inputrc sync-git-config sync-ghostty-settings sync-codium-settings
 
 set-bashrc:
 	cp home/.bashrc $(HOME)/.bashrc
@@ -13,6 +13,14 @@ set-inputrc:
 
 sync-inputrc:
 	cp $(HOME)/.inputrc home/.inputrc
+
+set-git-config:
+	cp home/.gitconfig $(HOME)/.gitconfig
+	cp home/.gitignore $(HOME)/.gitignore
+
+sync-git-config:
+	cp $(HOME)/.gitconfig home/.gitconfig
+	cp $(HOME)/.gitignore home/.gitignore
 
 set-ghostty-settings:
 	cp home/.config/ghostty/config $(HOME)/.config/ghostty/config
@@ -49,11 +57,30 @@ generate-ssh-key:
 		cat $(HOME)/.ssh/id_ed25519.pub; \
 	fi
 
+NERD_FONTS_VERSION=v3.5.1
+install-hack-nerd-font:
+	rm -rf /tmp/Hack.tar.xz $(HOME)/.local/share/fonts/hack-nerd-font
+	wget -O /tmp/Hack.tar.xz https://github.com/ryanoasis/nerd-fonts/releases/download/$(NERD_FONTS_VERSION)/Hack.tar.xz
+	mkdir -p $(HOME)/.local/share/fonts/hack-nerd-font
+	tar -C $(HOME)/.local/share/fonts/hack-nerd-font -xf /tmp/Hack.tar.xz
+	fc-cache -f $(HOME)/.local/share/fonts
+	rm -f /tmp/Hack.tar.xz
+
 KUBECTL_VERSION=v1.33.5
 install-kubectl:
 	mkdir -p $(HOME)/.local/bin
 	wget -O $(HOME)/.local/bin/kubectl https://dl.k8s.io/release/$(KUBECTL_VERSION)/bin/linux/amd64/kubectl
 	chmod 755 $(HOME)/.local/bin/kubectl
+
+K9S_VERSION=v0.51.0
+install-k9s:
+	rm -rf /tmp/k9s.tar.gz /tmp/k9s
+	wget -O /tmp/k9s.tar.gz https://github.com/derailed/k9s/releases/download/$(K9S_VERSION)/k9s_Linux_amd64.tar.gz
+	mkdir -p $(HOME)/.local/bin /tmp/k9s
+	tar -C /tmp/k9s -xzf /tmp/k9s.tar.gz
+	mv /tmp/k9s/k9s $(HOME)/.local/bin/k9s
+	chmod 755 $(HOME)/.local/bin/k9s
+	rm -rf /tmp/k9s /tmp/k9s.tar.gz
 
 VIRTCTL_VERSION=v1.5.2
 install-virtctl:

@@ -1,0 +1,22 @@
+Go to Gnome "Extension Manager"
+
+install:
+    - "Dash to Dock"
+        - "Position and size"
+            - "Show on all monitors"
+            - "Intelligent autohide"
+            - "Dock icon size 32"
+        - "Launchers"
+            - "Show pinned application"
+            - "Show runing application"
+                - "Show open windows' preview"
+            - disabla allt annat
+        - "Behaviour"
+            - "Click action -> 'Focus or app spread'"
+    - "Hide Top Bar"
+        - "Sensitivity"
+            - "Show panel in overview"
+            - disabla allt annat
+        - "Intellihide"
+            - disable allt
+    - "Tiling Assistant"
