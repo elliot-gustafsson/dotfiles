@@ -29,11 +29,34 @@ install-firefox:
 	sudo apt update
 	sudo apt install -y firefox
 
+install-ghostty:
+	sudo apt update && sudo apt install -y \
+	    libgtk-4-1 \
+	    libadwaita-1-0
+	mkdir -p /tmp/ghostty-out
+	podman build -o /tmp/ghostty-out -f Containerfile.ghostty-builder .
+
+	sudo chown -R root:root /tmp/ghostty-out
+	sudo find /tmp/ghostty-out -type d -exec chmod 755 {} +
+	sudo find /tmp/ghostty-out/share -type f -exec chmod 644 {} +
+	sudo find /tmp/ghostty-out/bin -type f -exec chmod 755 {} +
+	sudo find /tmp/ghostty-out/lib -type f -exec chmod 755 {} +
+
+	sudo cp -a --remove-destination /tmp/ghostty-out/bin/* /usr/bin/
+	sudo cp -a --remove-destination /tmp/ghostty-out/share/* /usr/share/
+	sudo cp -a --remove-destination /tmp/ghostty-out/lib/* /usr/lib/
+	sudo rm -rf /tmp/ghostty-out
+
+	sudo ldconfig
+	sudo update-desktop-database /usr/share/applications
+	sudo gtk4-update-icon-cache -f -t -q /usr/share/icons/hicolor
+
 cleanup:
 	sudo apt autoremove --purge -y && sudo apt clean
 
 install-things:
 	sudo apt update && sudo apt install -y \
+    gnome-shell-extension-manager \
     gcc \
     clang \
     lld \
