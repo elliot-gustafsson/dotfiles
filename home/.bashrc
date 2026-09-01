@@ -183,13 +183,16 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH=$PATH:$HOME/.cargo/bin
 
-alias vim="nvim"
-alias vi="nvim"
 alias kc="kubectl config use-context"
 alias code="codium"
 
 if [ -f $HOME/.config/bashenvs ]; then
     source $HOME/.config/bashenvs
+fi
+
+if command -v nvim &>/dev/null; then
+    alias vim="nvim"
+    alias vi="nvim"
 fi
 
 # kubectl completion
