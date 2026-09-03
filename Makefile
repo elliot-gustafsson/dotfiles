@@ -160,3 +160,8 @@ install-codium:
 	gtk4-update-icon-cache -f -t -q $(HOME)/.local/share/icons/hicolor 2>/dev/null || true
 	rm -f /tmp/codium.tar.gz
 	@echo "VSCodium $(CODIUM_VERSION) installed successfully."
+
+install-mc:
+	mkdir -p $(HOME)/.local/bin
+	wget -O $(HOME)/.local/bin/mc https://dl.min.io/client/mc/release/linux-amd64/archive/mc
+	chmod 755 $(HOME)/.local/bin/mc
