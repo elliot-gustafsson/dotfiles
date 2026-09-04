@@ -88,7 +88,7 @@ install-virtctl:
 	wget -O $(HOME)/.local/bin/virtctl https://github.com/kubevirt/kubevirt/releases/download/$(VIRTCTL_VERSION)/virtctl-$(VIRTCTL_VERSION)-linux-amd64
 	chmod 755 $(HOME)/.local/bin/virtctl
 
-GO_VERSION=go1.27.0
+GO_VERSION=go1.27.1
 install-go:
 	rm -rf /tmp/go.tar.gz $(HOME)/.local/go
 	wget -O /tmp/go.tar.gz https://go.dev/dl/$(GO_VERSION).linux-amd64.tar.gz
