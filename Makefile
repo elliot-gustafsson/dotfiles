@@ -42,6 +42,14 @@ save-codium-extensions:
 install-codium-extensions:
 	cat extra/codium/extensions.txt | xargs -n 1 codium --install-extension
 
+set-zed-settings:
+	cp home/.config/zed/settings.json $(HOME)/.config/zed/settings.json
+	cp home/.config/zed/keymap.json $(HOME)/.config/zed/keymap.json
+
+sync-zed-settings:
+	cp $(HOME)/.config/zed/settings.json home/.config/zed/settings.json
+	cp $(HOME)/.config/zed/keymap.json home/.config/zed/keymap.json
+
 ### install things ###
 
 generate-ssh-key:
@@ -108,6 +116,9 @@ install-jsonnet:
 	mv /tmp/go-jsonnet/jsonnet* ~/.local/bin/
 	rm -rf /tmp/go-jsonnet /tmp/go-jsonnet.tar.gz
 
+install-jsonnet-language-server:
+	go install github.com/grafana/jsonnet-language-server@latest
+
 NVIM_VERSION=v0.11.6
 install-nvim:
 	rm -rf /tmp/nvim.tar.gz $(HOME)/.local/nvim
@@ -165,3 +176,17 @@ install-mc:
 	mkdir -p $(HOME)/.local/bin
 	wget -O $(HOME)/.local/bin/mc https://dl.min.io/client/mc/release/linux-amd64/archive/mc
 	chmod 755 $(HOME)/.local/bin/mc
+
+ZED_VERSION=v1.18.1
+install-zed:
+	rm -rf /tmp/zed.tar.gz $(HOME)/.local/zed.app
+	wget -O /tmp/zed.tar.gz https://github.com/zed-industries/zed/releases/download/$(ZED_VERSION)/zed-linux-x86_64.tar.gz
+	mkdir -p $(HOME)/.local/bin $(HOME)/.local/share/applications $(HOME)/.local/share/icons/hicolor/512x512/apps
+	tar -C $(HOME)/.local -xzf /tmp/zed.tar.gz
+	ln -sf $(HOME)/.local/zed.app/bin/zed $(HOME)/.local/bin/zed
+	ln -sf $(HOME)/.local/zed.app/share/icons/hicolor/512x512/apps/zed.png $(HOME)/.local/share/icons/hicolor/512x512/apps/zed.png
+	cp $(HOME)/.local/zed.app/share/applications/dev.zed.Zed.desktop $(HOME)/.local/share/applications/
+	update-desktop-database $(HOME)/.local/share/applications 2>/dev/null || true
+	gtk4-update-icon-cache -f -t -q $(HOME)/.local/share/icons/hicolor 2>/dev/null || true
+	rm -f /tmp/zed.tar.gz
+	@echo "Zed $(ZED_VERSION) installed successfully."
