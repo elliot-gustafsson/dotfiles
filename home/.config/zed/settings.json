@@ -14,7 +14,11 @@
     // -------------------------
     // --- UI & Panel Layout ---
     // -------------------------
-    "ui_font_size": 16,
+    "ui_font_size": 14,
+    "title_bar": {
+        "show_sign_in": false,
+        "show_user_menu": false,
+    },
     "diagnostics": {
         "button": false,
     },
@@ -39,23 +43,26 @@
         "button": false,
     },
     "preview_tabs": {
-        "enabled": false,
-        "enable_preview_from_file_finder": true,
-        "enable_keep_preview_on_code_navigation": true,
+        "enabled": true,
+        "enable_preview_file_from_code_navigation": true,
+        "enable_keep_preview_on_code_navigation": false,
+        "enable_preview_multibuffer_from_code_navigation": true,
     },
     "restore_on_file_reopen": true,
+    "reveal_if_open": true,
     // -----------------------
     // --- Editor Behavior ---
     // -----------------------
     "buffer_font_family": "Hack Nerd Font",
     "buffer_font_size": 12.0,
-    "buffer_font_fallbacks": ["monospace", "monospace"],
+    // "buffer_font_fallbacks": ["monospace", "monospace"],
     "tab_size": 4,
-    "hard_tabs": false,
+    "hard_tabs": true,
     "soft_wrap": "editor_width",
-    "format_on_save": "on",
+    // "format_on_save": "on",
     "auto_indent_on_paste": true,
     "use_autoclose": true,
+    "lsp_results_location": "picker",
     "auto_signature_help": false,
     "show_signature_help_after_edits": false,
     "show_completions_on_input": true,
@@ -69,6 +76,10 @@
     },
     "completions": {
         // "words": false,
+    },
+    "toolbar": {
+        "breadcrumbs": false,
+        "quick_actions": false,
     },
     // ------------------------------
     // --- Files & Source Control ---
@@ -189,14 +200,6 @@
     // --- Language Specific Overrides ---
     // -----------------------------------
     "languages": {
-        "Makefile": {
-            "hard_tabs": true,
-            "tab_size": 4,
-        },
-        "Make": {
-            "hard_tabs": true,
-            "tab_size": 4,
-        },
         "Go": {
             "format_on_save": "on",
             "formatter": {
@@ -214,15 +217,20 @@
         "PHP": {
             "tab_size": 4,
             "hard_tabs": false,
-        },
-        "YAML": {
-            "tab_size": 2,
+            "format_on_save": "modifications",
+            "language_servers": ["intelephense", "!phpactor"],
         },
         "JSON": {
-            "tab_size": 4,
+            "format_on_save": "on",
+            "hard_tabs": false,
         },
         "JSONC": {
-            "tab_size": 4,
+            "format_on_save": "on",
+            "hard_tabs": false,
+        },
+        "YAML": {
+            "format_on_save": "on",
+            "hard_tabs": false,
         },
         "Jsonnet": {
             "tab_size": 4,

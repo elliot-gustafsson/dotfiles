@@ -37,8 +37,14 @@
             "ctrl-b": "git::Blame",
             "alt-right": "editor::MoveToEndOfLine",
             "shift-alt-right": "editor::SelectToEndOfLine",
-            "alt-left": "editor::MoveToBeginningOfLine",
-            "shift-alt-left": "editor::SelectToBeginningOfLine",
+            "alt-left": [
+                "editor::MoveToBeginningOfLine",
+                { "stop_at_indent": true, "stop_at_soft_wraps": true },
+            ],
+            "shift-alt-left": [
+                "editor::SelectToBeginningOfLine",
+                { "stop_at_indent": true, "stop_at_soft_wraps": true },
+            ],
             "ctrl-r": "buffer_search::DeployReplace",
             "ctrl-f8": "editor::ToggleBreakpoint",
             "ctrl-shift-r": ["pane::DeploySearch", { "replace_enabled": true }],
