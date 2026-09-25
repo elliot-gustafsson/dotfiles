@@ -163,6 +163,11 @@ install-codium:
 	wget -O /tmp/codium.tar.gz https://github.com/VSCodium/vscodium/releases/download/$(CODIUM_VERSION)/VSCodium-linux-x64-$(CODIUM_VERSION).tar.gz
 	mkdir -p $(HOME)/.local/bin $(HOME)/.local/share/vscodium $(HOME)/.local/share/applications $(HOME)/.local/share/icons/hicolor/512x512/apps
 	tar -C $(HOME)/.local/share/vscodium -xzf /tmp/codium.tar.gz
+	@if command -v aa-enabled >/dev/null 2>&1 && aa-enabled -q; then \
+		echo "AppArmor active: Setting SUID permissions on chrome-sandbox..."; \
+		sudo chown root:root $(HOME)/.local/share/vscodium/chrome-sandbox && \
+		sudo chmod 4755 $(HOME)/.local/share/vscodium/chrome-sandbox; \
+	fi
 	ln -sf $(HOME)/.local/share/vscodium/bin/codium $(HOME)/.local/bin/codium
 	ln -sf $(HOME)/.local/share/vscodium/bin/codium $(HOME)/.local/bin/code
 	ln -sf $(HOME)/.local/share/vscodium/resources/app/resources/linux/code.png $(HOME)/.local/share/icons/hicolor/512x512/apps/codium.png
@@ -174,7 +179,7 @@ install-codium:
 
 install-mc:
 	mkdir -p $(HOME)/.local/bin
-	wget -O $(HOME)/.local/bin/mc https://dl.min.io/client/mc/release/linux-amd64/archive/mc
+	wget -O $(HOME)/.local/bin/mc https://dl.min.io/aistor/mc/release/linux-amd64/mc
 	chmod 755 $(HOME)/.local/bin/mc
 
 ZED_VERSION=v1.19.2

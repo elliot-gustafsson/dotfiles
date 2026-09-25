@@ -20,14 +20,15 @@ export MOZILLA_PREFS
 
 install-firefox:
 	@if command -v snap &>/dev/null && snap list firefox &>/dev/null; then \
-		sudo snap remove firefox; \
+		sudo snap remove firefox || true; \
 	fi
 	sudo install -d -m 0755 /etc/apt/keyrings
-	wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc
+	wget -qO- https://packages.mozilla.org/apt/repo-signing-key.gpg | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+	sudo chmod 644 /etc/apt/keyrings/packages.mozilla.org.asc
 	echo "$$MOZILLA_REPO" | sudo tee /etc/apt/sources.list.d/mozilla.sources > /dev/null
 	echo "$$MOZILLA_PREFS" | sudo tee /etc/apt/preferences.d/mozilla > /dev/null
 	sudo apt update
-	sudo apt install -y firefox
+	sudo apt install -y --allow-downgrades firefox
 
 install-ghostty:
 	sudo apt update && sudo apt install -y \
@@ -89,7 +90,6 @@ install-things:
     usbutils \
     lsof \
     rsync \
-    fastfetch \
     fd-find \
     p7zip \
     p7zip-full \
