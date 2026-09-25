@@ -90,7 +90,7 @@ install-k9s:
 	chmod 755 $(HOME)/.local/bin/k9s
 	rm -rf /tmp/k9s /tmp/k9s.tar.gz
 
-VIRTCTL_VERSION=v1.5.2
+VIRTCTL_VERSION=v1.6.6
 install-virtctl:
 	mkdir -p $(HOME)/.local/bin
 	wget -O $(HOME)/.local/bin/virtctl https://github.com/kubevirt/kubevirt/releases/download/$(VIRTCTL_VERSION)/virtctl-$(VIRTCTL_VERSION)-linux-amd64
