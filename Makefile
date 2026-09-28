@@ -142,6 +142,12 @@ RUST_VERSION=1.96.0
 install-rust:
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path --default-toolchain $(RUST_VERSION)
 
+SOPS_VERSION=v3.13.3
+install-sops:
+	mkdir -p $(HOME)/.local/bin
+	wget -O $(HOME)/.local/bin/sops https://github.com/getsops/sops/releases/download/$(SOPS_VERSION)/sops-$(SOPS_VERSION).linux.amd64
+	chmod 755 $(HOME)/.local/bin/sops
+
 define CODIUM_DESKTOP
 [Desktop Entry]
 Name=VSCodium
