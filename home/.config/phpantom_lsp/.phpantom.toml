@@ -2,6 +2,7 @@
 version = "8.5"
 
 [indexing]
+strategy = "composer"
 exclude = [
     ".git",
     ".svn",
