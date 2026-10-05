@@ -243,6 +243,10 @@
     "yaml.format.bracketSpacing": false,
     "yaml.maxItemsComputed": 100000,
     "yaml.schemas": {
+        "https://json.schemastore.org/github-workflow.json": [
+            ".github/workflows/*.yml",
+            ".github/workflows/*.yaml"
+        ],
         "kubernetes": [
             ""
         ],
