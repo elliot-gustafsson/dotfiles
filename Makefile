@@ -1,6 +1,6 @@
-set-settings: set-bashrc set-inputrc set-git-config set-ghostty-settings set-codium-settings
+set-settings: set-bashrc set-inputrc set-git-config set-ghostty-settings set-codium-settings set-zed-settings set-phpantom-settings
 
-sync-settings: sync-bashrc sync-inputrc sync-git-config sync-ghostty-settings sync-codium-settings
+sync-settings: sync-bashrc sync-inputrc sync-git-config sync-ghostty-settings sync-codium-settings sync-zed-settings sync-phpantom-settings
 
 set-bashrc:
 	cp home/.bashrc $(HOME)/.bashrc
@@ -49,6 +49,16 @@ set-zed-settings:
 sync-zed-settings:
 	cp $(HOME)/.config/zed/settings.json home/.config/zed/settings.json
 	cp $(HOME)/.config/zed/keymap.json home/.config/zed/keymap.json
+
+set-phpantom-settings:
+	mkdir -p $(HOME)/.config/mago
+	mkdir -p $(HOME)/.config/phpantom_lsp
+	cp home/.config/mago/mago.toml $(HOME)/.config/mago/mago.toml
+	cp home/.config/phpantom_lsp/.phpantom.toml $(HOME)/.config/phpantom_lsp/.phpantom.toml
+
+sync-phpantom-settings:
+	cp $(HOME)/.config/mago/mago.toml home/.config/mago/mago.toml
+	cp $(HOME)/.config/phpantom_lsp/.phpantom.toml home/.config/phpantom_lsp/.phpantom.toml
 
 ### install things ###
 
@@ -147,6 +157,15 @@ install-sops:
 	mkdir -p $(HOME)/.local/bin
 	wget -O $(HOME)/.local/bin/sops https://github.com/getsops/sops/releases/download/$(SOPS_VERSION)/sops-$(SOPS_VERSION).linux.amd64
 	chmod 755 $(HOME)/.local/bin/sops
+
+
+PHPANTOM_VERSION=0.10.0
+install-phpantom:
+	mkdir -p $(HOME)/.local/bin
+	wget -O /tmp/phpantom.tar.gz https://github.com/PHPantom-dev/phpantom_lsp/releases/download/$(PHPANTOM_VERSION)/phpantom_lsp-x86_64-unknown-linux-gnu.tar.gz
+	tar -C $(HOME)/.local/bin -xzf /tmp/phpantom.tar.gz
+	chmod 755 $(HOME)/.local/bin/phpantom_lsp
+	rm /tmp/phpantom.tar.gz
 
 define CODIUM_DESKTOP
 [Desktop Entry]

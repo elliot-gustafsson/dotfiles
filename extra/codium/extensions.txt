@@ -1,4 +1,3 @@
-bmewburn.vscode-intelephense-client
 buenon.scratchpads
 docker.docker
 eamodio.gitlens
@@ -8,6 +7,7 @@ hilleer.yaml-plus-json
 llvm-vs-code-extensions.vscode-clangd
 mads-hartmann.bash-ide-vscode
 ms-pyright.pyright
+phpantom.phpantom
 redhat.vscode-xml
 redhat.vscode-yaml
 rust-lang.rust-analyzer

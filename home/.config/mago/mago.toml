@@ -1,0 +1,5 @@
+[formatter]
+classlike-brace-style = "same-line"
+function-brace-style = "same-line"
+method-brace-style = "same-line"
+control-brace-style = "same-line"

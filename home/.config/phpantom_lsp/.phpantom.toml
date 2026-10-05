@@ -1,0 +1,19 @@
+[php]
+version = "8.5"
+
+[indexing]
+exclude = [
+    ".git",
+    ".svn",
+    "CVS",
+    ".DS_Store",
+    "node_modules"
+]
+
+[semantic_tokens]
+mode = "contextual"
+
+[diagnostics]
+workspace = false
+unresolved-member-access = false
+extra-arguments = false
