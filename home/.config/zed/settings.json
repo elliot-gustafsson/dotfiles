@@ -10,15 +10,15 @@
     "tabs": {
         "show_diagnostics": "errors",
         "file_icons": true,
-        "git_status": true
+        "git_status": true,
     },
     "status_bar": {
         "show_active_file": true,
-        "line_endings_button": true
+        "line_endings_button": true,
     },
     "search": {
         "button": true,
-        "center_on_match": true
+        "center_on_match": true,
     },
     "auto_update": false,
     "base_keymap": "VSCode",
@@ -376,7 +376,7 @@
                 "yaml": {
                     "schemas": {
                         "kubernetes": [""],
-                        "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.33.5-standalone-strict/all.json": [
+                        "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.35.8-standalone-strict/all.json": [
                             "kube/*.yml",
                             "kube/*.yaml",
                         ],
