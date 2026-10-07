@@ -7,6 +7,19 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+    "tabs": {
+        "show_diagnostics": "errors",
+        "file_icons": true,
+        "git_status": true
+    },
+    "status_bar": {
+        "show_active_file": true,
+        "line_endings_button": true
+    },
+    "search": {
+        "button": true,
+        "center_on_match": true
+    },
     "auto_update": false,
     "base_keymap": "VSCode",
     "icon_theme": "Zed (Default)",
@@ -16,8 +29,18 @@
     // -------------------------
     "ui_font_size": 14,
     "title_bar": {
+        "show_user_picture": false,
+        "show_project_items": true,
+        "show_worktree_name": false,
+        "show_branch_status_icon": true,
         "show_sign_in": false,
         "show_user_menu": false,
+    },
+    "gutter": {
+        "min_line_number_digits": 2,
+        "folds": false,
+        "runnables": true,
+        "breakpoints": true,
     },
     "diagnostics": {
         "button": false,
@@ -31,13 +54,24 @@
     },
     "git_panel": {
         "dock": "left",
+        "default_width": 350,
+        "file_icons": true,
+        "tree_view": true,
+        "group_by": "staging",
+        "entry_primary_click_action": "view_file",
     },
     "project_panel": {
         "dock": "left",
+        "default_width": 350,
         "auto_fold_dirs": false,
-        "auto_reveal_entries": true,
-        "indent_size": 20,
+        "auto_reveal_entries": false,
+        "indent_size": 16,
+        "entry_spacing": "standard",
     },
+    "debugger": {
+        "dock": "left",
+    },
+    "disable_ai": true,
     "agent": {
         "enabled": false,
         "button": false,
@@ -54,8 +88,11 @@
     // --- Editor Behavior ---
     // -----------------------
     "buffer_font_family": "Hack Nerd Font",
-    "buffer_font_size": 12.0,
+    "buffer_font_size": 11.5,
     // "buffer_font_fallbacks": ["monospace", "monospace"],
+    "buffer_font_features": {
+        "calt": false,
+    },
     "tab_size": 4,
     "hard_tabs": true,
     "soft_wrap": "editor_width",
@@ -88,8 +125,7 @@
     "ensure_final_newline_on_save": true,
     "remove_trailing_whitespace_on_save": true,
     "file_types": {
-        "plaintext": ["CODEOWNERS"],
-        "Jsonnet": ["jsonnet", "libsonnet"],
+        // "plaintext": ["CODEOWNERS"],
     },
     "git": {
         "inline_blame": {
@@ -103,10 +139,13 @@
     // --- Terminal & Telemetry ---
     // ----------------------------
     "terminal": {
-        "font_size": 13.0,
+        "font_size": 12.0,
         "blinking": "on",
         "max_scroll_history_lines": 999999999999,
         "minimum_contrast": 0,
+        "default_height": 360,
+        "starts_open": true,
+        "show_count_badge": true,
     },
     "telemetry": {
         "diagnostics": false,
@@ -122,50 +161,117 @@
     },
     "theme_overrides": {
         "One Dark": {
+            "players": [
+                {
+                    "cursor": "#ffffff", // change to your preferred color (e.g., #ffffff, #dce0e5, #528bff)
+                },
+            ],
             "editor.background": "#2b2b2b",
             "editor.gutter.background": "#222222",
             "terminal.background": "#222222",
             "panel.background": "#2c2c2c",
             "syntax": {
-                "comment": { "color": "#7a7e85" },
-                "keyword": { "color": "#CC7832" },
-                "keyword.operator": { "color": "#CC7832" },
-                "keyword.function": { "color": "#CC7832" },
-                "string": { "color": "#4e8a63" },
-                "string.escape": { "color": "#CC7832" },
-
+                "comment": {
+                    "color": "#7a7e85",
+                },
+                "keyword": {
+                    "color": "#CC7832",
+                },
+                "keyword.operator": {
+                    "color": "#CC7832",
+                },
+                "keyword.function": {
+                    "color": "#CC7832",
+                },
+                "string": {
+                    "color": "#4e8a63",
+                },
+                "string.escape": {
+                    "color": "#CC7832",
+                },
                 // Functions & Methods
-                "function": { "color": "#FFC66D" },
-                "function.call": { "color": "#FFC66D" },
-                "function.method": { "color": "#FFC66D" },
-                "function.method.call": { "color": "#FFC66D" },
-                "function.builtin": { "color": "#FFC66D" }, // copy, append, make, clear
-
+                "function": {
+                    "color": "#FFC66D",
+                },
+                "function.call": {
+                    "color": "#FFC66D",
+                },
+                "function.method": {
+                    "color": "#FFC66D",
+                },
+                "function.method.call": {
+                    "color": "#FFC66D",
+                },
+                "function.builtin": {
+                    "color": "#FFC66D",
+                }, // copy, append, make, clear
                 // Types
-                "type": { "color": "#6fafbd" },
-                "type.builtin": { "color": "#CC7832" }, // string, int, bool, error
-                "include": { "color": "#CC7832" },
-                "repeat": { "color": "#CC7832" },
-                "conditional": { "color": "#CC7832" },
-
+                "type": {
+                    "color": "#6fafbd",
+                },
+                "type.builtin": {
+                    "color": "#CC7832",
+                }, // string, int, bool, error
+                "include": {
+                    "color": "#CC7832",
+                },
+                "repeat": {
+                    "color": "#CC7832",
+                },
+                "conditional": {
+                    "color": "#CC7832",
+                },
                 // Identifiers & Fields
-                "variable": { "color": "#bcbec4" },
-                "variable.parameter": { "color": "#bcbec4" },
-                "variable.builtin": { "color": "#CC7832" },
-                "field": { "color": "#bcbec4" },
-                "property": { "color": "#bcbec4" },
-                "property.json_key": { "color": "#c77dbb" }, // JSON keys only
-                "namespace": { "color": "#AFBF7E" }, // package main, fmt, os
-                "define": { "color": "#6fafbd" }, // local field definitions (hidden)
-                "punctuation.special": { "color": "#6fafbd" }, // :: and ::: delimiters
-
+                "variable": {
+                    "color": "#bcbec4",
+                },
+                "variable.parameter": {
+                    "color": "#bcbec4",
+                },
+                "variable.builtin": {
+                    "color": "#CC7832",
+                },
+                "field": {
+                    "color": "#bcbec4",
+                },
+                "property": {
+                    // "color": "#bcbec4",
+                    "color": "#CC7832",
+                },
+                "property.json_key": {
+                    "color": "#c77dbb",
+                }, // JSON keys only
+                "property.yaml_key": {
+                    "color": "#CC7832",
+                },
+                "namespace": {
+                    "color": "#AFBF7E",
+                }, // package main, fmt, os
+                "define": {
+                    "color": "#bcbec4",
+                },
+                "punctuation.special": {
+                    "color": "#6fafbd",
+                }, // :: and ::: delimiters
                 // Constants, Literals, Operators
-                "number": { "color": "#2aacB8" },
-                "boolean": { "color": "#CC7832" },
-                "constant.builtin": { "color": "#CC7832" },
-                "constant": { "color": "#c77dbb" },
-                "operator": { "color": "#bcbec4" },
-                "punctuation": { "color": "#bcbec4" },
+                "number": {
+                    "color": "#2aacB8",
+                },
+                "boolean": {
+                    "color": "#CC7832",
+                },
+                "constant.builtin": {
+                    "color": "#CC7832",
+                },
+                "constant": {
+                    "color": "#c77dbb",
+                },
+                "operator": {
+                    "color": "#bcbec4",
+                },
+                "punctuation": {
+                    "color": "#bcbec4",
+                },
             },
         },
     },
@@ -174,6 +280,10 @@
     // -----------------------------------
     "global_lsp_settings": {
         "semantic_token_rules": [
+            {
+                "token_type": "property",
+                "foreground_color": "#bcbec4", // Code properties from LSP -> Grey
+            },
             {
                 "token_type": "type",
                 "token_modifiers": ["defaultLibrary"],
@@ -218,7 +328,7 @@
             "tab_size": 4,
             "hard_tabs": false,
             "format_on_save": "modifications",
-            "language_servers": ["intelephense", "!phpactor"],
+            "language_servers": ["phpantom", "!intelephense", "!phpactor"],
         },
         "JSON": {
             "format_on_save": "on",
@@ -231,8 +341,10 @@
         "YAML": {
             "format_on_save": "on",
             "hard_tabs": false,
+            "tab_size": 2,
         },
         "Jsonnet": {
+            "format_on_save": "on",
             "tab_size": 4,
             "language_servers": ["jsonnet-language-server"],
         },
@@ -285,93 +397,9 @@
                 "jpath": ["vendor", "lib"],
             },
         },
-        "intelephense": {
-            "initialization_options": {
-                "environment": {
-                    "phpVersion": "8.4",
-                },
-                "format": {
-                    "braces": "k&r",
-                },
-                "files": {
-                    "maxSize": 100000000,
-                },
-                "phpdoc": {
-                    "returnVoid": false,
-                },
-                "stubs": [
-                    "apache",
-                    "bcmath",
-                    "bz2",
-                    "calendar",
-                    "com_dotnet",
-                    "Core",
-                    "ctype",
-                    "curl",
-                    "date",
-                    "dba",
-                    "dom",
-                    "enchant",
-                    "exif",
-                    "FFI",
-                    "fileinfo",
-                    "filter",
-                    "fpm",
-                    "ftp",
-                    "gd",
-                    "gettext",
-                    "gmp",
-                    "hash",
-                    "iconv",
-                    "imap",
-                    "intl",
-                    "json",
-                    "ldap",
-                    "libxml",
-                    "mbstring",
-                    "meta",
-                    "mysqli",
-                    "oci8",
-                    "odbc",
-                    "openssl",
-                    "pcntl",
-                    "pcre",
-                    "PDO",
-                    "pgsql",
-                    "Phar",
-                    "posix",
-                    "pspell",
-                    "random",
-                    "readline",
-                    "redis",
-                    "Reflection",
-                    "session",
-                    "shmop",
-                    "SimpleXML",
-                    "snmp",
-                    "soap",
-                    "sockets",
-                    "sodium",
-                    "SPL",
-                    "sqlite3",
-                    "standard",
-                    "superglobals",
-                    "sysvmsg",
-                    "sysvsem",
-                    "sysvshm",
-                    "tidy",
-                    "tokenizer",
-                    "xdebug",
-                    "xml",
-                    "xmlreader",
-                    "xmlrpc",
-                    "xmlwriter",
-                    "xsl",
-                    "yaml",
-                    "Zend OPcache",
-                    "zip",
-                    "zlib",
-                ],
+        "phpantom": {
+            "binary": {
+                "path": "phpantom_lsp",
             },
         },
     },

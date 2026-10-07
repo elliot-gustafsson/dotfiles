@@ -207,7 +207,7 @@ install-mc:
 	wget -O $(HOME)/.local/bin/mc https://dl.min.io/aistor/mc/release/linux-amd64/mc
 	chmod 755 $(HOME)/.local/bin/mc
 
-ZED_VERSION=v1.19.2
+ZED_VERSION=v1.23.2
 install-zed:
 	rm -rf /tmp/zed.tar.gz $(HOME)/.local/zed.app
 	wget -O /tmp/zed.tar.gz https://github.com/zed-industries/zed/releases/download/$(ZED_VERSION)/zed-linux-x86_64.tar.gz

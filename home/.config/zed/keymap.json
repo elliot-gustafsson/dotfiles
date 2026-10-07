@@ -9,7 +9,12 @@
             "ctrl-e": "projects::OpenRecent",
             "ctrl-f12": "outline::Toggle",
             "ctrl-g": "go_to_line::Toggle",
-            "ctrl-shift-r": ["pane::DeploySearch", { "replace_enabled": true }],
+            "ctrl-shift-r": [
+                "pane::DeploySearch",
+                {
+                    "replace_enabled": true,
+                },
+            ],
             "ctrl--": "pane::GoBack",
             "ctrl-shift-w": "pane::CloseActiveItem",
             "alt-f12": "terminal_panel::ToggleFocus",
@@ -39,19 +44,39 @@
             "shift-alt-right": "editor::SelectToEndOfLine",
             "alt-left": [
                 "editor::MoveToBeginningOfLine",
-                { "stop_at_indent": true, "stop_at_soft_wraps": true },
+                {
+                    "stop_at_indent": true,
+                    "stop_at_soft_wraps": true,
+                },
             ],
             "shift-alt-left": [
                 "editor::SelectToBeginningOfLine",
-                { "stop_at_indent": true, "stop_at_soft_wraps": true },
+                {
+                    "stop_at_indent": true,
+                    "stop_at_soft_wraps": true,
+                },
             ],
             "ctrl-r": "buffer_search::DeployReplace",
             "ctrl-f8": "editor::ToggleBreakpoint",
-            "ctrl-shift-r": ["pane::DeploySearch", { "replace_enabled": true }],
+            "ctrl-shift-r": [
+                "pane::DeploySearch",
+                {
+                    "replace_enabled": true,
+                },
+            ],
         },
     },
     {
-        "context": "Debugger",
+        "context": "Workspace && debugger_stopped",
+        "bindings": {
+            "f9": "debugger::Continue",
+            "f8": "debugger::StepOver",
+            "f7": "debugger::StepInto",
+            "shift-f8": "debugger::StepOut",
+        },
+    },
+    {
+        "context": "debugger_stopped > Editor",
         "bindings": {
             "f9": "debugger::Continue",
             "f8": "debugger::StepOver",
@@ -65,6 +90,31 @@
             "shift-. f": "project_panel::NewFile",
             "shift-. d": "project_panel::NewDirectory",
             "ctrl-shift-c": "project_panel::CollapseAllEntries",
+        },
+    },
+    {
+        "context": "Terminal",
+        "bindings": {
+            "ctrl-shift-o": "pane::SplitRight",
+            "ctrl-shift-t": "workspace::NewTerminal",
+        },
+    },
+    {
+        "context": "Editor",
+        "bindings": {
+            "ctrl-shift-o": "pane::SplitRight",
+        },
+    },
+    {
+        "context": "Workspace",
+        "bindings": {
+            "ctrl-shift-enter": "workspace::ToggleZoom",
+        },
+    },
+    {
+        "context": "Editor",
+        "bindings": {
+            "ctrl-shift-enter": "workspace::ToggleZoom",
         },
     },
 ]
