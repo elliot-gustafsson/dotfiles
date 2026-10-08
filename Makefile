@@ -158,6 +158,11 @@ install-sops:
 	wget -O $(HOME)/.local/bin/sops https://github.com/getsops/sops/releases/download/$(SOPS_VERSION)/sops-$(SOPS_VERSION).linux.amd64
 	chmod 755 $(HOME)/.local/bin/sops
 
+YQ_VERSION=v4.54.1
+install-yq:
+	mkdir -p $(HOME)/.local/bin
+	wget -O $(HOME)/.local/bin/yq https://github.com/mikefarah/yq/releases/download/$(YQ_VERSION)/yq_linux_amd64
+	chmod 755 $(HOME)/.local/bin/yq
 
 PHPANTOM_VERSION=0.10.0
 install-phpantom:
