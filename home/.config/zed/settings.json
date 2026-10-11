@@ -23,7 +23,8 @@
     "auto_update": false,
     "base_keymap": "VSCode",
     "icon_theme": "Zed (Default)",
-    "cli_default_open_behavior": "new_window",
+    "cli_default_open_behavior": "existing_window",
+    "restore_on_startup": "last_session",
     // -------------------------
     // --- UI & Panel Layout ---
     // -------------------------
@@ -46,6 +47,7 @@
         "button": false,
     },
     "outline_panel": {
+        "button": false,
         "dock": "left",
     },
     "collaboration_panel": {
@@ -118,6 +120,7 @@
         "breadcrumbs": false,
         "quick_actions": false,
     },
+    "diff_view_style": "split",
     // ------------------------------
     // --- Files & Source Control ---
     // ------------------------------

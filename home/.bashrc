@@ -184,8 +184,7 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH=$PATH:$HOME/.cargo/bin
 
 alias kc="kubectl config use-context"
-# alias code="codium"
-alias zed="zed --classic"
+# alias code="codium"c
 alias code="zed"
 alias codium="zed"
 
