@@ -1,0 +1,92 @@
+[
+    // {
+    //     "label": "Debug Zig Test",
+    //     "adapter": "CodeLLDB",
+    //     "request": "launch",
+    //     "expressions": "native",
+    //     "breakpointMode": "file",
+    //     "stopOnEntry": true,
+    //     "initCommands": [
+    //         "settings set target.inline-breakpoint-strategy always",
+    //     ],
+    //     "build": {
+    //         "command": "zig",
+    //         "args": [
+    //             "test",
+    //             "-fllvm",
+    //             "--test-no-exec",
+    //             "$ZED_FILE",
+    //             "-femit-bin=/tmp/zed-zig-test",
+    //         ],
+    //         "cwd": "$ZED_WORKTREE_ROOT",
+    //     },
+    //     "program": "/tmp/zed-zig-test",
+    //     "cwd": "$ZED_WORKTREE_ROOT",
+    // },
+    // {
+    //     "label": "Debug Zig Project (zig build)",
+    //     "adapter": "CodeLLDB",
+    //     "request": "launch",
+    //     "expressions": "native",
+    //     "breakpointMode": "file",
+    //     "stopOnEntry": true,
+    //     "initCommands": [
+    //         "settings set target.inline-breakpoint-strategy always",
+    //     ],
+    //     "build": {
+    //         "command": "zig",
+    //         "args": ["build"],
+    //         "cwd": "$ZED_WORKTREE_ROOT",
+    //     },
+    //     "program": "$ZED_WORKTREE_ROOT/zig-out/bin/$ZED_STEM",
+    //     "cwd": "$ZED_WORKTREE_ROOT",
+    // },
+    // {
+    //     "label": "Debug Zig Test",
+    //     "adapter": "CodeLLDB",
+    //     "request": "launch",
+    //     "expressions": "native",
+    //     "breakpointMode": "file",
+    //     "stopOnEntry": false,
+    //     "initCommands": [
+    //         "settings set target.inline-breakpoint-strategy always",
+    //     ],
+    //     "build": {
+    //         "command": "zig",
+    //         "args": [
+    //             "test",
+    //             "-fllvm",
+    //             "--test-no-exec",
+    //             "$ZED_FILE",
+    //             "--test-filter",
+    //             "$ZED_SYMBOL",
+    //             "-femit-bin=/tmp/zed-zig-test",
+    //         ],
+    //         "cwd": "$ZED_WORKTREE_ROOT",
+    //     },
+    //     "program": "/tmp/zed-zig-test",
+    //     "cwd": "$ZED_WORKTREE_ROOT",
+    // },
+
+    {
+        "label": "Debug Zig Tests",
+        "adapter": "CodeLLDB",
+        "request": "launch",
+        "program": "$ZED_WORKTREE_ROOT/zig-out/bin/test-bin",
+        "cwd": "$ZED_WORKTREE_ROOT",
+        "expressions": "native",
+        "breakpointMode": "file",
+        "stopOnEntry": false,
+        "build": {
+            "command": "zig",
+            "args": [
+                "test",
+                "-fllvm",
+                "--test-no-exec",
+                "$ZED_FILE",
+                "-femit-bin=$ZED_WORKTREE_ROOT/zig-out/bin/test-bin",
+            ],
+            "cwd": "$ZED_WORKTREE_ROOT",
+        },
+    },
+]

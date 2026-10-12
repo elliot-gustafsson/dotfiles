@@ -67,6 +67,13 @@
         },
     },
     {
+        "context": "Workspace",
+        "bindings": {
+            "f5": "debugger::Start",
+            "shift-f5": "debugger::Stop",
+        },
+    },
+    {
         "context": "Workspace && debugger_stopped",
         "bindings": {
             "f9": "debugger::Continue",

@@ -72,6 +72,10 @@
     },
     "debugger": {
         "dock": "left",
+        "save_breakpoints": true,
+    },
+    "inlay_hints": {
+        "show_value_hints": true,
     },
     "disable_ai": true,
     "agent": {

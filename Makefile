@@ -45,10 +45,12 @@ install-codium-extensions:
 set-zed-settings:
 	cp home/.config/zed/settings.json $(HOME)/.config/zed/settings.json
 	cp home/.config/zed/keymap.json $(HOME)/.config/zed/keymap.json
+	cp home/.config/zed/debug.json $(HOME)/.config/zed/debug.json
 
 sync-zed-settings:
 	cp $(HOME)/.config/zed/settings.json home/.config/zed/settings.json
 	cp $(HOME)/.config/zed/keymap.json home/.config/zed/keymap.json
+	cp $(HOME)/.config/zed/debug.json home/.config/zed/debug.json
 
 set-phpantom-settings:
 	mkdir -p $(HOME)/.config/mago
