@@ -19,6 +19,7 @@
             "ctrl-shift-w": "pane::CloseActiveItem",
             "alt-f12": "terminal_panel::ToggleFocus",
             "ctrl-shift-f12": "workspace::ToggleZoom",
+            "ctrl-shift-c": null,
         },
     },
     {

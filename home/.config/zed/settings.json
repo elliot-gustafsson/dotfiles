@@ -104,6 +104,7 @@
     "soft_wrap": "editor_width",
     // "format_on_save": "on",
     "auto_indent_on_paste": true,
+    "extend_comment_on_newline": false,
     "use_autoclose": true,
     "lsp_results_location": "picker",
     "auto_signature_help": false,
