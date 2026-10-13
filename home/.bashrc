@@ -195,6 +195,11 @@ fi
 if command -v nvim &>/dev/null; then
     alias vim="nvim"
     alias vi="nvim"
+    export EDITOR="nvim"
+    export VISUAL="nvim"
+else
+    export EDITOR="vi"
+    export VISUAL="vi"
 fi
 
 # kubectl completion
