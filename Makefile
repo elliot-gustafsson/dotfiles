@@ -174,6 +174,16 @@ install-phpantom:
 	chmod 755 $(HOME)/.local/bin/phpantom_lsp
 	rm /tmp/phpantom.tar.gz
 
+FLUX_VERSION=v2.9.6
+install-flux:
+	rm -rf /tmp/flux.tar.gz /tmp/flux
+	wget -O /tmp/flux.tar.gz https://github.com/fluxcd/flux2/releases/download/$(FLUX_VERSION)/flux_$(patsubst v%,%,$(FLUX_VERSION))_linux_amd64.tar.gz
+	mkdir -p $(HOME)/.local/bin /tmp/flux
+	tar -C /tmp/flux -xzf /tmp/flux.tar.gz
+	mv /tmp/flux/flux $(HOME)/.local/bin/flux
+	chmod 755 $(HOME)/.local/bin/flux
+	rm -rf /tmp/flux /tmp/flux.tar.gz
+
 define CODIUM_DESKTOP
 [Desktop Entry]
 Name=VSCodium
