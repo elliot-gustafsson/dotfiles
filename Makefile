@@ -131,7 +131,7 @@ install-jsonnet:
 install-jsonnet-language-server:
 	go install github.com/grafana/jsonnet-language-server@latest
 
-NVIM_VERSION=v0.11.6
+NVIM_VERSION=v0.12.6
 install-nvim:
 	rm -rf /tmp/nvim.tar.gz $(HOME)/.local/nvim
 	wget -O /tmp/nvim.tar.gz https://github.com/neovim/neovim/releases/download/$(NVIM_VERSION)/nvim-linux-x86_64.tar.gz

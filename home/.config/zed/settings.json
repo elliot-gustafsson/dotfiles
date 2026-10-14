@@ -134,6 +134,7 @@
     "remove_trailing_whitespace_on_save": true,
     "file_types": {
         // "plaintext": ["CODEOWNERS"],
+        "Dockerfile": ["Dockerfile*", "Containerfile*"],
     },
     "git": {
         "inline_blame": {
@@ -243,8 +244,8 @@
                     "color": "#bcbec4",
                 },
                 "property": {
-                    // "color": "#bcbec4",
-                    "color": "#CC7832",
+                    "color": "#bcbec4",
+                    // "color": "#CC7832",
                 },
                 "property.json_key": {
                     "color": "#c77dbb",
