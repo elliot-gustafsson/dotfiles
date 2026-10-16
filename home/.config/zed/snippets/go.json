@@ -1,0 +1,7 @@
+{
+    "Go": {
+        "prefix": "iferr",
+        "body": ["if err != nil {", "\treturn ${1:nil}, err", "}"],
+        "description": "If error not nil return block"
+    }
+}

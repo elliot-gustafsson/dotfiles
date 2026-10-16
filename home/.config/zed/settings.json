@@ -365,7 +365,7 @@
     "lsp": {
         "gopls": {
             "initialization_options": {
-                "completeUnimported": true,
+                "completeUnimported": false,
                 "usePlaceholders": true,
                 "semanticTokens": true,
                 "analyses": {

@@ -46,11 +46,13 @@ set-zed-settings:
 	cp home/.config/zed/settings.json $(HOME)/.config/zed/settings.json
 	cp home/.config/zed/keymap.json $(HOME)/.config/zed/keymap.json
 	cp home/.config/zed/debug.json $(HOME)/.config/zed/debug.json
+	cp -r home/.config/zed/snippets/* $(HOME)/.config/zed/snippets
 
 sync-zed-settings:
 	cp $(HOME)/.config/zed/settings.json home/.config/zed/settings.json
 	cp $(HOME)/.config/zed/keymap.json home/.config/zed/keymap.json
 	cp $(HOME)/.config/zed/debug.json home/.config/zed/debug.json
+	cp -r $(HOME)/.config/zed/snippets/* home/.config/zed/snippets
 
 set-phpantom-settings:
 	mkdir -p $(HOME)/.config/mago
