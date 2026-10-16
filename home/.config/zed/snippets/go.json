@@ -1,0 +1,37 @@
+{
+    "if": {
+        "prefix": "if",
+        "body": ["if ${1:condition} {", "\t$0", "}"],
+        "description": "if err != nil"
+    },
+    "iferr": {
+        "prefix": "iferr",
+        "body": ["if err != nil {", "\treturn ${1:nil}, err", "}"],
+        "description": "if err != nil"
+    },
+    "for": {
+        "prefix": "for",
+        "body": ["for ${1:i} := 0; ${1:i} < ${2:n}; ${1:i}++ {", "\t$0", "}"],
+        "description": "boomer loop"
+    },
+    "forr": {
+        "prefix": "forr",
+        "body": ["for k, v := range ${1:items} {", "\t$0", "}"],
+        "description": "for range statement"
+    },
+    "forrval": {
+        "prefix": "forrval",
+        "body": ["for v := range ${1:x} {", "\t$0", "}"],
+        "description": "for range single value statement"
+    },
+    "switch": {
+        "prefix": "switch",
+        "body": ["switch ${1:condition} {", "case ${2:statement}:", "}"],
+        "description": "test function"
+    },
+    "ftest": {
+        "prefix": "ftest",
+        "body": ["func Test${1:Xxx}(t *testing.T) {", "\t${0}", "}"],
+        "description": "test function"
+    }
+}
