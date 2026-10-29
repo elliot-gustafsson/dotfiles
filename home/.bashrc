@@ -19,8 +19,8 @@ shopt -s histappend
 shopt -s cmdhist
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000000
-HISTFILESIZE=1000000
+HISTSIZE=-1
+HISTFILESIZE=-1
 
 # Avoid duplicates
 HISTCONTROL=ignoreboth
