@@ -1,128 +1,128 @@
 [
-    {
-        "context": "Workspace",
-        "bindings": {
-            "shift shift": "file_finder::Toggle",
-            "ctrl-n": "file_finder::Toggle",
-            "ctrl-shift-n": "file_finder::Toggle",
-            "ctrl-t": "file_finder::Toggle",
-            "ctrl-e": "projects::OpenRecent",
-            "ctrl-f12": "outline::Toggle",
-            "ctrl-g": "go_to_line::Toggle",
-            "ctrl-shift-r": [
-                "pane::DeploySearch",
-                {
-                    "replace_enabled": true,
-                },
-            ],
-            "ctrl--": "pane::GoBack",
-            "ctrl-shift-w": "pane::CloseActiveItem",
-            "alt-f12": "terminal_panel::ToggleFocus",
-            "ctrl-shift-f12": "workspace::ToggleZoom",
-            "ctrl-shift-c": null,
+  {
+    "context": "Workspace",
+    "bindings": {
+      "shift shift": "file_finder::Toggle",
+      "ctrl-n": "file_finder::Toggle",
+      "ctrl-shift-n": "file_finder::Toggle",
+      "ctrl-t": "file_finder::Toggle",
+      "ctrl-e": "projects::OpenRecent",
+      "ctrl-f12": "outline::Toggle",
+      "ctrl-g": "go_to_line::Toggle",
+      "ctrl-shift-r": [
+        "pane::DeploySearch",
+        {
+          "replace_enabled": true,
         },
+      ],
+      "ctrl--": "pane::GoBack",
+      "ctrl-shift-w": "pane::CloseActiveItem",
+      "alt-f12": "terminal_panel::ToggleFocus",
+      "ctrl-shift-f12": "workspace::ToggleZoom",
+      "ctrl-shift-c": null,
     },
-    {
-        "context": "Editor",
-        "bindings": {
-            "ctrl-d": "editor::DuplicateLineDown",
-            "ctrl-y": "editor::DeleteLine",
-            "ctrl-shift-j": "editor::JoinLines",
-            "ctrl-enter": "editor::NewlineBelow",
-            "ctrl-alt-enter": "editor::NewlineAbove",
-            "ctrl-shift-u": "editor::ConvertToUpperCase",
-            "ctrl-shift-alt-u": "editor::ConvertToLowerCase",
-            "ctrl-m": "editor::GoToDefinition",
-            "ctrl-alt-m": "editor::GoToImplementation",
-            "ctrl-shift-m": "editor::GoToDefinition",
-            "shift-f6": "editor::Rename",
-            "alt-enter": "editor::ToggleCodeActions",
-            "ctrl-alt-l": "editor::Format",
-            "ctrl-alt-o": "editor::OrganizeImports",
-            "ctrl-p": "editor::ShowSignatureHelp",
-            "ctrl-b": "git::Blame",
-            "alt-right": "editor::MoveToEndOfLine",
-            "shift-alt-right": "editor::SelectToEndOfLine",
-            "alt-left": [
-                "editor::MoveToBeginningOfLine",
-                {
-                    "stop_at_indent": true,
-                    "stop_at_soft_wraps": true,
-                },
-            ],
-            "shift-alt-left": [
-                "editor::SelectToBeginningOfLine",
-                {
-                    "stop_at_indent": true,
-                    "stop_at_soft_wraps": true,
-                },
-            ],
-            "ctrl-r": "buffer_search::DeployReplace",
-            "ctrl-f8": "editor::ToggleBreakpoint",
-            "ctrl-shift-r": [
-                "pane::DeploySearch",
-                {
-                    "replace_enabled": true,
-                },
-            ],
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-d": "editor::DuplicateLineDown",
+      "ctrl-y": "editor::DeleteLine",
+      "ctrl-shift-j": "editor::JoinLines",
+      "ctrl-enter": "editor::NewlineBelow",
+      "ctrl-alt-enter": "editor::NewlineAbove",
+      "ctrl-shift-u": "editor::ConvertToUpperCase",
+      "ctrl-shift-alt-u": "editor::ConvertToLowerCase",
+      "ctrl-m": "editor::GoToDefinition",
+      "ctrl-alt-m": "editor::GoToImplementation",
+      "ctrl-shift-m": "editor::GoToDefinition",
+      "shift-f6": "editor::Rename",
+      "alt-enter": "editor::ToggleCodeActions",
+      "ctrl-alt-l": "editor::Format",
+      "ctrl-alt-o": "editor::OrganizeImports",
+      "ctrl-p": "editor::ShowSignatureHelp",
+      "ctrl-b": "git::Blame",
+      "alt-right": "editor::MoveToEndOfLine",
+      "shift-alt-right": "editor::SelectToEndOfLine",
+      "alt-left": [
+        "editor::MoveToBeginningOfLine",
+        {
+          "stop_at_indent": true,
+          "stop_at_soft_wraps": true,
         },
-    },
-    {
-        "context": "Workspace",
-        "bindings": {
-            "f5": "debugger::Start",
-            "shift-f5": "debugger::Stop",
+      ],
+      "shift-alt-left": [
+        "editor::SelectToBeginningOfLine",
+        {
+          "stop_at_indent": true,
+          "stop_at_soft_wraps": true,
         },
-    },
-    {
-        "context": "Workspace && debugger_stopped",
-        "bindings": {
-            "f9": "debugger::Continue",
-            "f8": "debugger::StepOver",
-            "f7": "debugger::StepInto",
-            "shift-f8": "debugger::StepOut",
+      ],
+      "ctrl-r": "buffer_search::DeployReplace",
+      "ctrl-f8": "editor::ToggleBreakpoint",
+      "ctrl-shift-r": [
+        "pane::DeploySearch",
+        {
+          "replace_enabled": true,
         },
+      ],
     },
-    {
-        "context": "debugger_stopped > Editor",
-        "bindings": {
-            "f9": "debugger::Continue",
-            "f8": "debugger::StepOver",
-            "f7": "debugger::StepInto",
-            "shift-f8": "debugger::StepOut",
-        },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "f5": "debugger::Start",
+      "shift-f5": "debugger::Stop",
     },
-    {
-        "context": "ProjectPanel && not_editing",
-        "bindings": {
-            "shift-. f": "project_panel::NewFile",
-            "shift-. d": "project_panel::NewDirectory",
-            "ctrl-shift-c": "project_panel::CollapseAllEntries",
-        },
+  },
+  {
+    "context": "Workspace && debugger_stopped",
+    "bindings": {
+      "f9": "debugger::Continue",
+      "f8": "debugger::StepOver",
+      "f7": "debugger::StepInto",
+      "shift-f8": "debugger::StepOut",
     },
-    {
-        "context": "Terminal",
-        "bindings": {
-            "ctrl-shift-o": "pane::SplitRight",
-            "ctrl-shift-t": "workspace::NewTerminal",
-        },
+  },
+  {
+    "context": "debugger_stopped > Editor",
+    "bindings": {
+      "f9": "debugger::Continue",
+      "f8": "debugger::StepOver",
+      "f7": "debugger::StepInto",
+      "shift-f8": "debugger::StepOut",
     },
-    {
-        "context": "Editor",
-        "bindings": {
-            "ctrl-shift-o": "pane::SplitRight",
-        },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "shift-. f": "project_panel::NewFile",
+      "shift-. d": "project_panel::NewDirectory",
+      "ctrl-shift-c": "project_panel::CollapseAllEntries",
     },
-    {
-        "context": "Workspace",
-        "bindings": {
-            "ctrl-shift-enter": "workspace::ToggleZoom",
-        },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-shift-o": "pane::SplitRight",
+      "ctrl-shift-t": "workspace::NewTerminal",
     },
-    {
-        "context": "Editor",
-        "bindings": {
-            "ctrl-shift-enter": "workspace::ToggleZoom",
-        },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-shift-o": "pane::SplitRight",
     },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-shift-enter": "workspace::ToggleZoom",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-shift-enter": "workspace::ToggleZoom",
+    },
+  },
 ]
