@@ -339,6 +339,10 @@
   // --- Language Specific Overrides ---
   // -----------------------------------
   "languages": {
+    "Git Commit": {
+      "allow_rewrap": "in_comments",
+      "preferred_line_length": 9999,
+    },
     "Go": {
       "format_on_save": "on",
       "formatter": {
