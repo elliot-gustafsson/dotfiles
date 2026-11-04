@@ -152,7 +152,7 @@ install-zig:
 	ln -sf $(HOME)/.local/zig/zig $(HOME)/.local/bin/zig
 	rm -f /tmp/zig.tar.xz
 
-RUST_VERSION=1.96.0
+RUST_VERSION=1.99.1
 install-rust:
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path --default-toolchain $(RUST_VERSION)
 
