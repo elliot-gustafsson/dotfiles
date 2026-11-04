@@ -142,7 +142,7 @@ install-nvim:
 	ln -sf $(HOME)/.local/nvim/bin/nvim $(HOME)/.local/bin/nvim
 	rm -f /tmp/nvim.tar.gz
 
-ZIG_VERSION=0.16.0
+ZIG_VERSION=0.17.0
 install-zig:
 	rm -rf /tmp/zig.tar.xz $(HOME)/.local/zig
 	wget -O /tmp/zig.tar.xz https://ziglang.org/download/$(ZIG_VERSION)/zig-x86_64-linux-$(ZIG_VERSION).tar.xz
