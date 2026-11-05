@@ -239,3 +239,13 @@ install-zed:
 	gtk4-update-icon-cache -f -t -q $(HOME)/.local/share/icons/hicolor 2>/dev/null || true
 	rm -f /tmp/zed.tar.gz
 	@echo "Zed $(ZED_VERSION) installed successfully."
+
+ETCDCTL_VERSION=v3.7.3
+install-etcdctl:
+	rm -rf /tmp/etcd.tar.gz /tmp/etcd
+	wget -O /tmp/etcd.tar.gz https://github.com/etcd-io/etcd/releases/download/$(ETCDCTL_VERSION)/etcd-$(ETCDCTL_VERSION)-linux-amd64.tar.gz
+	mkdir -p $(HOME)/.local/bin /tmp/etcd
+	tar -C /tmp/etcd --strip-components=1 -xzf /tmp/etcd.tar.gz
+	mv /tmp/etcd/etcdctl $(HOME)/.local/bin/etcdctl
+	chmod 755 $(HOME)/.local/bin/etcdctl
+	rm -rf /tmp/etcd /tmp/etcd.tar.gz
