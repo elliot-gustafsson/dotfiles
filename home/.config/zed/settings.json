@@ -391,6 +391,10 @@
         "jsonnet-language-server"
       ],
     },
+    "Dockerfile": {
+      "format_on_save": "on",
+      "hard_tabs": false,
+    }
   },
   // -------------------------------------
   // --- Language Server Configurations ---
