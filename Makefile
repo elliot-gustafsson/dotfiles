@@ -110,7 +110,7 @@ install-virtctl:
 	wget -O $(HOME)/.local/bin/virtctl https://github.com/kubevirt/kubevirt/releases/download/$(VIRTCTL_VERSION)/virtctl-$(VIRTCTL_VERSION)-linux-amd64
 	chmod 755 $(HOME)/.local/bin/virtctl
 
-GO_VERSION=go1.27.1
+GO_VERSION=go1.27.4
 install-go:
 	rm -rf /tmp/go.tar.gz $(HOME)/.local/go
 	wget -O /tmp/go.tar.gz https://go.dev/dl/$(GO_VERSION).linux-amd64.tar.gz
@@ -152,7 +152,7 @@ install-zig:
 	ln -sf $(HOME)/.local/zig/zig $(HOME)/.local/bin/zig
 	rm -f /tmp/zig.tar.xz
 
-RUST_VERSION=1.99.1
+RUST_VERSION=1.100.0
 install-rust:
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path --default-toolchain $(RUST_VERSION)
 
