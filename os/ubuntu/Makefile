@@ -107,5 +107,31 @@ install-things:
     fd-find \
     p7zip \
     p7zip-full \
+    ffmpeg \
+    libavcodec-extra \
     zstd && \
 	sudo apt clean
+
+install-hidetopbar:
+	GNOME_VER=$$(gnome-shell --version | awk '{print $$3}' | cut -d. -f1) && \
+	UUID="hidetopbar@mathieu.bidon.ca" && \
+	EXT_DIR="$(HOME)/.local/share/gnome-shell/extensions/$${UUID}" && \
+	PK=$$(curl -fsSL --connect-timeout 10 --max-time 20 "https://extensions.gnome.org/extension-info/?uuid=$${UUID}" | jq -r ".shell_version_map[\"$${GNOME_VER}\"].pk") && \
+	curl -fsSL --connect-timeout 10 --max-time 30 "https://extensions.gnome.org/download-extension/$${UUID}.shell-extension.zip?version_tag=$${PK}" -o /tmp/htb.zip && \
+	rm -rf "$${EXT_DIR}" && mkdir -p "$${EXT_DIR}" && \
+	unzip -qo /tmp/htb.zip -d "$${EXT_DIR}/" && \
+	rm -f /tmp/htb.zip && \
+	glib-compile-schemas "$${EXT_DIR}/schemas/" && \
+	(timeout 5 gnome-extensions enable "$${UUID}" 2>/dev/null || true)
+
+configure-desktop:
+	sudo install -d -m 0755 /etc/dconf/profile /etc/dconf/db/local.d
+	@if [ ! -f /etc/dconf/profile/user ]; then \
+		sudo install -m 0644 resources/etc/dconf/profile/user /etc/dconf/profile/user; \
+	elif ! grep -q '^system-db:local$$' /etc/dconf/profile/user; then \
+		echo "system-db:local" | sudo tee -a /etc/dconf/profile/user > /dev/null; \
+	fi
+	sudo install -m 0644 resources/etc/dconf/db/local.d/00-extensions /etc/dconf/db/local.d/00-extensions
+	sudo install -m 0644 resources/etc/dconf/db/local.d/02-desktop /etc/dconf/db/local.d/02-desktop
+	sudo touch /etc/dconf/db/local.d
+	sudo dconf update
