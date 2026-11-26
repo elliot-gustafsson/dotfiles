@@ -30,12 +30,26 @@ install-firefox:
 	sudo apt update
 	sudo apt install -y --allow-downgrades firefox
 
+UBUNTU_VERSION ?= $(shell . /etc/os-release && echo "$$VERSION_ID")
+ifeq ($(UBUNTU_VERSION),24.04)
+ZIG_VERSION ?= 0.15.2
+GHOSTTY_VERSION ?= 1.3.1
+else
+ZIG_VERSION ?= 0.17.0
+GHOSTTY_VERSION ?= 1.4.0
+endif
+
 install-ghostty:
+	@test -n "$(UBUNTU_VERSION)" || (echo "UBUNTU_VERSION is not set" >&2; exit 1)
 	sudo apt update && sudo apt install -y \
 	    libgtk-4-1 \
 	    libadwaita-1-0
 	mkdir -p /tmp/ghostty-out
-	podman build -o /tmp/ghostty-out -f Containerfile.ghostty-builder .
+	podman build \
+	    --build-arg UBUNTU_VERSION=$(UBUNTU_VERSION) \
+	    --build-arg ZIG_VERSION=$(ZIG_VERSION) \
+	    --build-arg GHOSTTY_VERSION=$(GHOSTTY_VERSION) \
+	    -o /tmp/ghostty-out -f Containerfile.ghostty-builder .
 
 	sudo chown -R root:root /tmp/ghostty-out
 	sudo find /tmp/ghostty-out -type d -exec chmod 755 {} +

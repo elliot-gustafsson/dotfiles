@@ -2,8 +2,8 @@ FROM quay.io/fedora/fedora-bootc:44 AS base
 
 FROM base AS ghostty-builder
 
-ARG ZIG_VERSION=0.15.2
-ARG GHOSTTY_VERSION=1.3.1
+ARG ZIG_VERSION=0.17.0
+ARG GHOSTTY_VERSION=1.4.0
 
 RUN dnf install -y \
     gtk4-devel \
@@ -20,9 +20,8 @@ RUN curl -sSL https://ziglang.org/download/${ZIG_VERSION}/zig-x86_64-linux-${ZIG
 RUN mkdir -p /tmp/ghostty /tmp/zig-cache /tmp/zig-global-cache && \
     curl -sSL https://release.files.ghostty.org/${GHOSTTY_VERSION}/ghostty-${GHOSTTY_VERSION}.tar.gz | tar -xz -C /tmp/ghostty --strip-components=1 && \
     cd /tmp/ghostty && \
-    /opt/zig/zig build \
+    ZIG_GLOBAL_CACHE_DIR=/tmp/zig-global-cache /opt/zig/zig build \
     --cache-dir /tmp/zig-cache \
-    --global-cache-dir /tmp/zig-global-cache \
     -Doptimize=ReleaseFast \
     -Dcpu=x86_64_v3 \
     -p /usr

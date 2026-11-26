@@ -1,6 +1,6 @@
 set-settings: set-bashrc set-inputrc set-git-config set-ghostty-settings set-codium-settings set-zed-settings set-phpantom-settings
 
-sync-settings: sync-bashrc sync-inputrc sync-git-config sync-ghostty-settings sync-codium-settings sync-zed-settings sync-phpantom-settings
+sync-settings: sync-bashrc sync-inputrc sync-git-config sync-ghostty-settings sync-zed-settings sync-phpantom-settings
 
 set-bashrc:
 	cp home/.bashrc $(HOME)/.bashrc
@@ -88,7 +88,7 @@ install-hack-nerd-font:
 	fc-cache -f $(HOME)/.local/share/fonts
 	rm -f /tmp/Hack.tar.xz
 
-KUBECTL_VERSION=v1.33.5
+KUBECTL_VERSION=v1.36.5
 install-kubectl:
 	mkdir -p $(HOME)/.local/bin
 	wget -O $(HOME)/.local/bin/kubectl https://dl.k8s.io/release/$(KUBECTL_VERSION)/bin/linux/amd64/kubectl
