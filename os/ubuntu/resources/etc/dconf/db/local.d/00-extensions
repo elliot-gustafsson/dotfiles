@@ -10,6 +10,7 @@ extend-height=false
 show-show-apps-button=false
 show-mounts=false
 show-trash=false
+show-icons-notifications-counter=false
 
 [org/gnome/shell/extensions/hidetopbar]
 show-in-overview=true
@@ -19,3 +20,6 @@ mouse-triggers-overview=false
 hot-corner=false
 enable-intellihide=false
 enable-active-window=false
+
+[org/gnome/shell/extensions/ding]
+show-home=false
